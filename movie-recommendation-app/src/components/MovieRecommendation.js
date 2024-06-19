@@ -26,7 +26,8 @@ const MovieRecommendation = () => {
   return (
     <div className="movie-recommendation">
       <header className="header">
-        <img src={logo} alt="IMDb Logo" style={{ width: '300px', height: 'auto' }}/>
+        <img src={logo} className='imdb-logo' alt="IMDb Logo" style={{ width: '300px', height: 'auto' }}/>
+        <button className="header-button">Mis <br></br> Recomendaciones</button>
       </header>
       <h1>Bienvenido a la pagina de recomendaciones de peliculas de IMDb</h1>
       <p>Para obtener tu recomendacion debes ingresar tres peliculas de tu interes, estado de animo y seleccionar una categoria.
