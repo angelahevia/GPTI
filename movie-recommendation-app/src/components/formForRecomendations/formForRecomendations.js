@@ -1,9 +1,13 @@
 // src/components/MovieRecommendation.js
 
 import React, { useState } from 'react';
-import axios from 'axios';
 import '../MovieRecommendation.css';
 import './formForRecomendations.css';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import Movie from '../movie/Movie';
+
+
+
 
 const FormForRecomendations = () => {
     const [movie1, setMovie1] = useState('');
@@ -11,19 +15,24 @@ const FormForRecomendations = () => {
     const [movie3, setMovie3] = useState('');
     const [mood, setMood] = useState('');
     const [category, setCategory] = useState('');
-    const [recommendations, setRecommendations] = useState([]);
-
+    const [generalPreferences, setGeneralPreferences] = useState('');
+    const [movies, setMovies] = useState([]);
+    const supabase = createClient('https://qpqvsikrykfocwygaaxt.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwcXZzaWtyeWtmb2N3eWdhYXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg4OTY4MDgsImV4cCI6MjAzNDQ3MjgwOH0.5EqtxynLkEzKH2Au3-ls39mNA9CNHhuvz_LTi1_Zy50')
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = {
-                movie1: movie1,
-                movie2: movie2,
-                movie3: movie3,
-                mood: mood,
-                category: category
+            const dataToSend = {
+                likedMovie1: movie1,
+                likedMovie2: movie2,
+                likedMovie3: movie3,
+                currentMood: mood,
+                preferredCategory: category,
+                generalPreferences: generalPreferences
             };
-            console.log(data);
+        const { data, error } = await supabase.functions.invoke('chat-gpt', {
+            body: dataToSend,
+        })
+        setMovies(data.response)
         } catch (error) {
             console.error('Error fetching recommendations:', error);
         }
@@ -69,10 +78,28 @@ const FormForRecomendations = () => {
                         <option value="Romance">Romance</option>
                         <option value="Otra">Otra</option>
                     </select>
-                    <button type="submit">Obtener recomendaciones</button>
+                    <input
+                        type="text"
+                        placeholder="Sugerencias Adicionales"
+                        value={generalPreferences}
+                        onChange={(e) => setGeneralPreferences(e.target.value)}
+                    />
                 </div>
+                <div className="form-recomendations-third">
+                    <button type="submit">Enviar</button>
+                </div>
+                
 
             </form>
+            {(movies.length > 0) && (
+                <h2 className="movie-board-title">Recomendaciones</h2>
+            )
+            }
+            <div className="movie-board">
+                {movies.map((movie, index) => (
+                    <Movie key={index} {...movie} />
+                ))}
+            </div>
         </div>
             
     );
