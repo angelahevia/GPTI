@@ -1,0 +1,102 @@
+/* src/components/MovieRecommendation.css */
+
+.movie-recommendation {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: yellow;
+
+  min-height: 100vh;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #121212;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 2);
+}
+
+.header-button {
+  background-color: #121212;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s, border-color 0.3s;
+}
+
+
+
+.header-button:hover {
+  transform: scale(1.05)
+}
+
+.header-button:active {
+  transform: scale(1);
+}
+
+.imdb-logo {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0.9;
+  transition: opacity 0.3s, transform 0.3s;
+
+
+}
+
+.imdb-logo:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input, .search-form select, .search-form button {
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #222;
+  color: yellow;
+}
+
+.movie img {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.posters {
+  position: absolute;
+  right: 20px;
+  top: 100px;
+}
+
+.posters img {
+  display: block;
+  margin-bottom: 10px;
+  width: 100px;
+  height: auto;
+}
