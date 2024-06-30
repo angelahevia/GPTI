@@ -5,7 +5,7 @@ import './myRecomendations.css';
 import '../MovieRecommendation.css';
 import logo from '../logo.jpg';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import Movie from '../movie/Movie';
+import MovieRecommended from '../movieRecommended/MovieRecommended';
 import { redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -18,6 +18,19 @@ const MyRecomendations = () => {
                 .from('recommendations')
                 .select('*')
             setMovies(recommendedMovies)
+            console.log(recommendedMovies)
+        } catch (error) {
+            console.error('Error fetching recommendations:', error);
+        }
+    };
+    const handleReviewSubmit = async (rating, title) => {
+        console.log(`Submitted rating: ${rating} stars`);
+        try {
+            const { data: recommendedMovies, fetchError } = await supabase
+                .from('recommendations')
+                .update({ calification: rating })
+                .eq('title', title)
+            alert('Gracias por tu feedback')
         } catch (error) {
             console.error('Error fetching recommendations:', error);
         }
@@ -44,7 +57,7 @@ const MyRecomendations = () => {
             }
             <div className="movie-board">
                 {movies.map((movie, index) => (
-                    <Movie key={index} {...movie} />
+                    <MovieRecommended key={index} {...movie} onSubmit={handleReviewSubmit} />
                 ))}
             </div>
         </div>
