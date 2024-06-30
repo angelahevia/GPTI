@@ -1,54 +1,30 @@
 // src/components/MovieRecommendation.js
 
 import React, { useState } from 'react';
-import axios from 'axios';
 import './MovieRecommendation.css';
 import logo from './logo.jpg';
 import poster1 from './poster1.png';
 import poster2 from './poster2.jpg';
 import poster3 from './poster3.jpg';
+import FormForRecomendations from './formForRecomendations/formForRecomendations';
+import { Link } from 'react-router-dom';
 
 const MovieRecommendation = () => {
-  const [mood, setMood] = useState('');
-  const [category, setCategory] = useState('');
   const [recommendations, setRecommendations] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // const response = await axios.post('/api/recommend', { mood, category });
-      // setRecommendations(response.data.recommendations);
-      // console log de mood y cateory
-      console.log(mood, category);
-    } catch (error) {
-      console.error('Error fetching recommendations:', error);
-    }
-  };
 
   return (
     <div className="movie-recommendation">
       <header className="header">
-        <img src={logo} alt="IMDb Logo" style={{ width: '300px', height: 'auto' }}/>
-        <form onSubmit={handleSubmit} className="search-form">
-          <input
-            type="text"
-            placeholder="Enter your mood"
-            value={mood}
-            onChange={(e) => setMood(e.target.value)}
-          />
-          <select value={category} onChange={(e) => setCategory(e.target.value)}>
-            <option value="">Select category</option>
-            <option value="Science Fiction">Science Fiction</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
-            <option value="Horror">Horror</option>
-            <option value="Romance">Romance</option>
-          </select>
-          <button type="submit">Get Recommendations</button>
-        </form>
+        <img src={logo} className='imdb-logo' alt="IMDb Logo" style={{ width: '300px', height: 'auto' }}/>
+        <Link to="/recomendations">
+          <button className="header-button">Mis <br></br> Recomendaciones</button>
+        </Link>
       </header>
-      <h1>Welcome to the IMDb recommendation page!</h1>
-      <p>This page is boosted by AI to recommend you the best movies for your evening</p>
+      <h1>Bienvenido a la pagina de recomendaciones de peliculas de IMDb</h1>
+      <p>Para obtener tu recomendacion debes ingresar tres peliculas de tu interes, estado de animo y seleccionar una categoria.
+      </p>
+      <FormForRecomendations />
       <div className="recommendations">
         {recommendations.map((movie, index) => (
           <div key={index} className="movie">

@@ -1,0 +1,62 @@
+/* src/components/Movie.css */
+.movie {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+}
+
+.movie-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.movie-title {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.movie-rating {
+    font-size: 1em;
+    color: #555;
+}
+
+
+
+.star-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.star {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: fill 0.2s;
+}
+
+.star+label {
+    margin-left: 8px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+button {
+    margin-top: 8px;
+    padding: 4px 8px;
+    background-color: #121212;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #12121294;
+}
